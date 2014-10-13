@@ -21,6 +21,10 @@ public class Player {
     {
         this.hp = hp;
     }
+    public void changeHp(int dhp)
+    {
+        this.hp += dhp;
+    }
 
     private Status status;
     public Status getStatus()

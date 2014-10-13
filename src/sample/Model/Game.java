@@ -1,5 +1,7 @@
 package sample.Model;
 
+import sample.Enums.GameState;
+import sample.Enums.Status;
 import sample.Model.Action.Move;
 
 /**
@@ -8,8 +10,8 @@ import sample.Model.Action.Move;
 public class Game {
     //region Singleton
     private Game(){
-
         players = new Player[2];
+        gameState = GameState.MainMenu;
     }
     private static Game gameSingleton;
     private static Game getGame()
@@ -20,6 +22,8 @@ public class Game {
     }
     //endregion
 
+    private GameState gameState;
+
     Player[] players;
 
     private Move currentMove;
@@ -28,11 +32,28 @@ public class Game {
         this.currentMove = move;
     }
 
+    private int anotherPlayer(int current)
+    {
+        if (current == 0)
+            return 1;
+        else
+            return 0;
+    }
+
     private void evaluateMove()
     {
-
+        int playerNum = currentMove.getPlayer();
+        if (players[playerNum].getStatus() == Status.Active)
+        {
+            //hit trial
+            players[anotherPlayer(playerNum)].changeHp(-currentMove.getAttack().getApproximateDamage());
+            //stun trial
+            //....
+        };
     }
 
 
+
+}
 
 }
