@@ -1,4 +1,4 @@
-package sample.Model.Action;
+package sample.model.action;
 
 /**
  * Created by Alexander on 10/13/2014.

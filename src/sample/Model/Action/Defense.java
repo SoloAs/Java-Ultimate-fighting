@@ -1,6 +1,6 @@
-package sample.Model.Action;
+package sample.model.action;
 
-import sample.Enums.Target;
+import sample.enums.Target;
 
 /**
  * Created by Alexander on 10/13/2014.

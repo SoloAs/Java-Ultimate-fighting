@@ -1,6 +1,7 @@
-package sample.Model;
+package sample.model;
 
-import sample.Enums.Status;
+import sample.enums.Status;
+import sample.model.action.Move;
 
 /**
  * Created by Alexander on 10/13/2014.
@@ -10,6 +11,25 @@ public class Player {
     {
         hp = 100;
         status = Status.Active;
+        name = "none";
+    }
+
+    public Player(String name)
+    {
+        hp = 100;
+        status = Status.Active;
+        this.name = name;
+    }
+
+
+    private String name;
+    public String getName()
+    {
+        return name;
+    }
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     private int hp;
@@ -35,5 +55,17 @@ public class Player {
     {
         this.status = status;
     }
+
+    private Move currentMove;
+    public Move getMove()
+    {
+        return currentMove;
+    }
+    public void setMove(Move move)
+    {
+        this.currentMove = move;
+    }
+
+
 
 }

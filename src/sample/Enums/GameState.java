@@ -1,4 +1,4 @@
-package sample.Enums;
+package sample.enums;
 
 /**
  * Created by Alexander on 10/13/2014.

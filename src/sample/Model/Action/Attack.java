@@ -1,8 +1,8 @@
-package sample.Model.Action;
+package sample.model.action;
 
 import sample.Consts;
-import sample.Enums.Target;
-import sample.Enums.AttackType;
+import sample.enums.Target;
+import sample.enums.AttackType;
 
 
 /**
