@@ -13,6 +13,7 @@ public class Game {
     private Game(){
         players = new Player[2];
         gameState = GameState.MainMenu;
+        random = new Random();
     }
     private static Game gameSingleton;
     public static Game getGame()
@@ -27,6 +28,9 @@ public class Game {
     public GameState getGameState()
     {
         return gameState;
+    }
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     private Player[] players;
@@ -45,39 +49,26 @@ public class Game {
         return currentPlayer;
     }
 
-    private int anotherPlayer()
+    private Random random;
+
+    public void setCurrentPlayer()
+    {
+        //Random random = new Random();
+        currentPlayer = random.nextInt(2);
+    }
+
+    public int anotherPlayer()
     {
         if (currentPlayer == 0)
             return 1;
         else
             return 0;
     }
-/*
-    private void Play()
-    {
 
-        switch (gameState)
-        {
-            case MainMenu:
-                //Visualiser.sayHello(); - приветствие и установка имен
-                break;
-            case Fight:
-                while ((players[0].getHp() >= 0) && (players[1].getHp() >= 0))
-                {
-                    //получить параметры хода и рассчитать
-                    evaluateMove();
-                }
-                break;
-            case Ending:
-                //выиграл игрок players[currentPlayer].getName();
-                break;
-        }
-    }
-*/
+
+
     public void evaluateMove()
     {
-        Random random = new Random();
-        currentPlayer = random.nextInt(2);
         for (int i = 0; i < players.length - 1; i++) {
             if (players[currentPlayer].getStatus() == Status.Active) {
                 //hit trial

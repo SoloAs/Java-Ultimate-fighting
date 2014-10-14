@@ -10,11 +10,11 @@ public class Move {
         this.defense = move.defense;
         this.attack = move.attack;
     }
-    public Move(Defense defense, Attack attack, int player)
+    public Move(Defense defense, Attack attack)
     {
         this.defense = defense;
         this.attack = attack;
-        this.player = player;
+      //  this.player = player;
     }
 
     private Defense defense;
@@ -37,10 +37,10 @@ public class Move {
         attack = atk;
     }
 
-    private int player;
-    public int getPlayer()
-    {
-        return player;
-    }
+   // private int player;
+   // public int getPlayer()
+   // {
+   //     return player;
+   // }
 
 }
