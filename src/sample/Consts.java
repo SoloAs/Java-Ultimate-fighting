@@ -6,7 +6,7 @@ package sample;
 public final class Consts {
     private Consts() { }
 
-    public static final int DAMAGE = 10;
+    public static final int DAMAGE = 30;
 
 
 

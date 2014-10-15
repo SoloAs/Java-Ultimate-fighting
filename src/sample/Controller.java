@@ -57,7 +57,7 @@ public class Controller {
                             visualiser.outStatus(game.getPlayers()[game.getCurrentPlayer()], game.getPlayers()[game.anotherPlayer()]);
                             //setting move parameteres
                             ma = visualiser.getMove();
-                            game.getPlayers()[0].setMove(new Move(new Defense(ma.getDefenseTarget()),
+                            game.getPlayers()[game.getCurrentPlayer()].setMove(new Move(new Defense(ma.getDefenseTarget()),
                                                          new Attack(ma.getAttackTarget(), ma.getAttackType())));
                             visualiser.printWhiteSpaces(2);
                         }
@@ -66,7 +66,7 @@ public class Controller {
                             visualiser.outStatus(game.getPlayers()[game.anotherPlayer()], game.getPlayers()[game.getCurrentPlayer()]);
 
                             ma = visualiser.getMove();
-                            game.getPlayers()[1].setMove(new Move(new Defense(ma.getDefenseTarget()),
+                            game.getPlayers()[game.anotherPlayer()].setMove(new Move(new Defense(ma.getDefenseTarget()),
                                                          new Attack(ma.getAttackTarget(), ma.getAttackType())));
                             visualiser.printWhiteSpaces(2);
                         }

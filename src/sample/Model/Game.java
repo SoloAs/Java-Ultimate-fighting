@@ -14,6 +14,7 @@ public class Game {
         players[1] = new Player();
         gameState = GameState.MainMenu;
         random = new Random();
+        currentPlayer = 0;
     }
     private static Game gameSingleton;
     public static Game getGame()
@@ -66,6 +67,7 @@ public class Game {
 
     public MoveResult[] evaluateMove()
     {
+       // setCurrentPlayer(); //random person making first move
         MoveResult[] results = new MoveResult[]{new MoveResult(), new MoveResult()};
         boolean hit = false;
         boolean enemyStunned = false;

@@ -29,22 +29,22 @@ public class Visualiser {
         return gameSingleton;
     }
     //endregion
-    private final String helloMsg = "Добро пожаловать в мой мимимишечный файтинг. Механика боя состоит в следующем: " +
-                                    "Каждый ход оба игрока наносят по удару и защищаются от вражеского удара." +
-                                    "Игрок, наносящий удар первым определяется случайно. Если игрок оглушен, он пропускает" +
-                                    "свою следующую атаку.\nАтаки различаются по цели (голова, тело, ноги), по типу   " +
+    private final String helloMsg = "Добро пожаловать в мой файтинг. Механика боя состоит в следующем: " +
+                                    "Каждый ход оба игрока наносят по удару и защищаются от вражеского удара. " +
+                                    "Игрок, наносящий удар первым, определяется случайно. Если игрок оглушен, он пропускает " +
+                                    "свою следующую атаку.\nАтаки различаются по цели (голова, тело, ноги), по типу" +
                                     "(разъяренная, обычная, точная). Защита различается только по цели. При совпадении цели атаки" +
-                                    "нападающиего и цели защиты атакуемого происходит блок(урон игноририуется).\n\nОсобенности выбора типа атаки:" +
+                                    "нападающего и цели защиты атакуемого происходит блок(урон игнорируется).\n\nОсобенности выбора типа атаки:" +
                                     "\nОбыкновенная(normal): 100% урона, 10% шанс оглушить\nРазъяренная(berserk): 150% урона, 25% " +
                                     "шанс промаха\nТочная(concentrated): 60% урона, 20% шанс оглушить\n\nОсобенности выбора цели атаки:\n" +
                                     "Тело(body) - 100% урона\nГолова(head) - 200% урона, 50% шанс промаха\nНоги(legs) - 60% урона, 30% шанс оглушить." +
-                                    "\nУдачи, боец :D\nВведите start для начала.";
+                                    "\nУдачи, боец :D\n\nВведите start для начала.";
 
     public void sayHello()
     {
         String answer = "";
         System.out.println(helloMsg);
-        while(!answer.matches("START|start|Start"))
+        while(!answer.matches("(?i)start"))
         answer = in.next();
     }
 
@@ -77,7 +77,7 @@ public class Visualiser {
             AttackType attackType = AttackType.Normal;
 
             System.out.print("Set an attack target: ");
-            while (!temp.matches("Head|HEAD|head|body|BODY|Body|Legs|LEGS|legs"))
+            while (!temp.matches("(?i)(head|body|legs)"))
                 temp = in.next();
                 switch (temp.toLowerCase().charAt(0)) {
                 case 'h':
@@ -92,7 +92,7 @@ public class Visualiser {
             }
 
             System.out.print("Set an attack type: ");
-            while (!temp.matches("Berserk|BERSERK|berserk|Normal|NORMAL|normal|Concentrated|CONCENTRATED|concentrated"))
+            while (!temp.matches("(?i)(berserk|normal|concentrated)"))
                 temp = in.next();
             switch (temp.toLowerCase().charAt(0)) {
                 case 'b':
@@ -107,7 +107,7 @@ public class Visualiser {
             }
 
             System.out.print("Set a defense target: ");
-            while (!temp.matches("Head|HEAD|head|body|BODY|Body|Legs|LEGS|legs"))
+            while (!temp.matches("(?i)(head|body|legs)"))
                 temp = in.next();
             switch (temp.toLowerCase().charAt(0)) {
                 case 'h':
