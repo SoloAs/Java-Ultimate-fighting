@@ -36,6 +36,7 @@ public class Controller {
     public void Play() {
         while (game.getGameState() != GameState.Ending) {
             switch (game.getGameState()) {
+
                 case MainMenu:
                     visualiser.sayHello();
                     String[] names = visualiser.getNames();
@@ -45,16 +46,16 @@ public class Controller {
                     break;
 
                 case Fight:
-                    MoveAttributes ma = new MoveAttributes();
+                    MoveAttributes ma;// = new MoveAttributes();
                     while ((game.getPlayers()[0].getHp() > 0) && (game.getPlayers()[1].getHp() > 0)) {
                         game.setCurrentPlayer();
 
-                        //получить параметры хода и рассчитать
+                        //get player parameters and visualise
                         if (game.getPlayers()[game.getCurrentPlayer()].getStatus() != Status.Stunned) {
                             visualiser.printWhiteSpaces(2);
 
                             visualiser.outStatus(game.getPlayers()[game.getCurrentPlayer()], game.getPlayers()[game.anotherPlayer()]);
-
+                            //setting move parameteres
                             ma = visualiser.getMove();
                             game.getPlayers()[0].setMove(new Move(new Defense(ma.getDefenseTarget()),
                                                          new Attack(ma.getAttackTarget(), ma.getAttackType())));
@@ -70,7 +71,7 @@ public class Controller {
                             visualiser.printWhiteSpaces(2);
                         }
 
-
+                        //process move and visualise it
                         visualiser.outMoveResult(game.evaluateMove());
 
 
@@ -83,7 +84,7 @@ public class Controller {
             }
         }
         visualiser.printWhiteSpaces(2);
-        visualiser.writeWinner(game.getPlayers()[game.getCurrentPlayer()].getName());
+        visualiser.outWinner(game.getPlayers()[game.getCurrentPlayer()].getName());
     }
 
 

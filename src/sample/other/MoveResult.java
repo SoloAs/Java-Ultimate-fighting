@@ -5,6 +5,8 @@ import sample.model.action.Attack;
 
 /**
  * Created by Alexander on 10/14/2014.
+ *
+ * Class for visualising move consiquences
  */
 public class MoveResult {
 
@@ -31,18 +33,13 @@ public class MoveResult {
         return name;
     }
 
-    private boolean hit;
-    public boolean getHit()
-    {
-        return hit;
-    }
-
 
     private int damage;
     public int getDamage()
     {
         return damage;
     }
+    public void setDamage(int damage) { this.damage = damage; }
 
     private boolean stunned;
     public boolean getStunned()

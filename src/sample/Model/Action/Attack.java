@@ -21,16 +21,12 @@ public class Attack {
 
     public Attack(Target attackTarget, AttackType attackType)
     {
-      /*  this.stunChance = stunChance;
-        this.approximateDamage = approximateDamage;
-        this.missChance = missChance;*/
         this.attackTarget = attackTarget;
         this.attackType = attackType;
         this.approximateDamage = Consts.DAMAGE;
         this.stunChance = this.missChance = 0;
 
 
-     //   AttackTarget at = AttackTarget.values()[1];
         switch (attackTarget) {
             case Head:
                 approximateDamage *= 2;

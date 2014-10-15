@@ -6,10 +6,6 @@ import sample.enums.Status;
 import sample.other.MoveResult;
 
 import java.util.Random;
-
-/**
- * Class mamka tvoya
- */
 public class Game {
     //region Singleton
     private Game(){
@@ -68,17 +64,13 @@ public class Game {
             return 0;
     }
 
-    /**
-     * Method for fucking yr mom
-     * @return yr fcked mom
-     */
     public MoveResult[] evaluateMove()
     {
-        MoveResult[] results = new MoveResult[2];
+        MoveResult[] results = new MoveResult[]{new MoveResult(), new MoveResult()};
         boolean hit = false;
         boolean enemyStunned = false;
-        int dmg = -1;
-        AttackResult attackResult = AttackResult.Missed;
+        int dmg = 0;
+        AttackResult attackResult;//.. = AttackResult.Missed;
 
         for (int i = 0; i < players.length; i++) {
             if (players[currentPlayer].getStatus() == Status.Active) {
@@ -109,11 +101,18 @@ public class Game {
 
             }
             else {
+                //changing status from stunned to active
                 players[currentPlayer].setStatus(Status.Active);
                 attackResult = AttackResult.Not_realised;
             }
-            results[i] = new MoveResult(attackResult, enemyStunned, dmg, players[currentPlayer].getName());
+            //forming visualising info
+      //      if (players[i].getHp() > 0)
+               results[i] = new MoveResult(attackResult, enemyStunned, dmg, players[currentPlayer].getName());
             if (players[0].getHp() <= 0 || players[1].getHp() <= 0) {
+                if (players[0].getHp() > 0)  //at last, current player is winner
+                    currentPlayer = 0;
+                else
+                    currentPlayer = 1;
                 gameState = GameState.Ending;
                 break;
             }
@@ -121,6 +120,8 @@ public class Game {
                 currentPlayer = anotherPlayer();
 
         }
+       // if (gameState == GameState.Ending)
+       //     results[currentPlayer].setDamage(-1);
         return results;
 
 

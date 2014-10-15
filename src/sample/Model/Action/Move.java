@@ -14,7 +14,6 @@ public class Move {
     {
         this.defense = defense;
         this.attack = attack;
-      //  this.player = player;
     }
 
     private Defense defense;
@@ -37,10 +36,5 @@ public class Move {
         attack = atk;
     }
 
-   // private int player;
-   // public int getPlayer()
-   // {
-   //     return player;
-   // }
 
 }

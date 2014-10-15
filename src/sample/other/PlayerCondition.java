@@ -5,6 +5,8 @@ import sample.model.Player;
 
 /**
  * Created by Alexander on 10/14/2014.
+ *
+ * Class for visualising player condition
  */
 public class PlayerCondition {
     public PlayerCondition(Player player)

@@ -7,5 +7,5 @@ public enum AttackResult {
     Succeeded,
     Missed,
     Blocked,
-    Not_realised
+    Not_realised //в случае оглушения
 }

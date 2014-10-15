@@ -5,6 +5,8 @@ import sample.enums.Target;
 
 /**
  * Created by Alexander on 10/14/2014.
+ *
+ * class for visualising player moves
  */
 public class MoveAttributes {
     public MoveAttributes(MoveAttributes ma)
