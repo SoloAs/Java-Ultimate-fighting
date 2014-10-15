@@ -1,17 +1,21 @@
 package sample.model;
 
+import sample.enums.AttackResult;
 import sample.enums.GameState;
 import sample.enums.Status;
+import sample.other.MoveResult;
 
 import java.util.Random;
 
 /**
- * Created by Alexander on 10/13/2014.
+ * Class mamka tvoya
  */
 public class Game {
     //region Singleton
     private Game(){
         players = new Player[2];
+        players[0] = new Player();
+        players[1] = new Player();
         gameState = GameState.MainMenu;
         random = new Random();
     }
@@ -53,7 +57,6 @@ public class Game {
 
     public void setCurrentPlayer()
     {
-        //Random random = new Random();
         currentPlayer = random.nextInt(2);
     }
 
@@ -65,27 +68,51 @@ public class Game {
             return 0;
     }
 
-
-
-    public void evaluateMove()
+    /**
+     * Method for fucking yr mom
+     * @return yr fcked mom
+     */
+    public MoveResult[] evaluateMove()
     {
-        for (int i = 0; i < players.length - 1; i++) {
+        MoveResult[] results = new MoveResult[2];
+        boolean hit = false;
+        boolean enemyStunned = false;
+        int dmg = -1;
+        AttackResult attackResult = AttackResult.Missed;
+
+        for (int i = 0; i < players.length; i++) {
             if (players[currentPlayer].getStatus() == Status.Active) {
+
                 //hit trial
-                boolean hit = random.nextInt(100) > players[currentPlayer].getMove().getAttack().getMissChance() &&
-                        players[currentPlayer].getMove().getAttack().getAttackTarget() != players[anotherPlayer()].getMove().getAttack().getAttackTarget();
+                hit =  players[currentPlayer].getMove().getAttack().getAttackTarget() != players[anotherPlayer()].getMove().getDefense().getDefenseTarget();
+                if (!hit)
+                    attackResult = AttackResult.Blocked;
+                else {
+                    hit = random.nextInt(100) > players[currentPlayer].getMove().getAttack().getMissChance();
+                    if (!hit)
+                        attackResult = AttackResult.Missed;
+                    else
+                        attackResult = AttackResult.Succeeded;
+                }
+
                 if (hit) {
-                    //damage
-                    int dmg = players[currentPlayer].getMove().getAttack().getApproximateDamage() * (4 + random.nextInt(4)) / 10;
-                    players[anotherPlayer()].changeHp(dmg);
+                    //damage counting
+                    dmg = players[currentPlayer].getMove().getAttack().getApproximateDamage() * (4 + random.nextInt(4)) / 10;
+                    players[anotherPlayer()].changeHp(-dmg);
+
                     //stun trial
-                    boolean enemyStunned = random.nextInt(100) < players[currentPlayer].getMove().getAttack().getStunChance();
+                    enemyStunned = random.nextInt(100) < players[currentPlayer].getMove().getAttack().getStunChance();
                     if (enemyStunned)
                         players[anotherPlayer()].setStatus(Status.Stunned);
+
                 }
 
             }
-            else players[currentPlayer].setStatus(Status.Active);
+            else {
+                players[currentPlayer].setStatus(Status.Active);
+                attackResult = AttackResult.Not_realised;
+            }
+            results[i] = new MoveResult(attackResult, enemyStunned, dmg, players[currentPlayer].getName());
             if (players[0].getHp() <= 0 || players[1].getHp() <= 0) {
                 gameState = GameState.Ending;
                 break;
@@ -94,6 +121,9 @@ public class Game {
                 currentPlayer = anotherPlayer();
 
         }
+        return results;
+
+
 
     }
 

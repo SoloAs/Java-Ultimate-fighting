@@ -7,6 +7,7 @@ import sample.model.Game;
 import sample.model.Player;
 import sample.model.action.Attack;
 import sample.other.MoveAttributes;
+import sample.other.MoveResult;
 import sample.other.PlayerCondition;
 
 import java.util.Scanner;
@@ -33,21 +34,21 @@ public class Visualiser {
     {
         String answer = "";
         System.out.println(helloMsg);
-        while(answer != "start")
-        in.next(answer);
+        while(!answer.matches("START|start|Start"))
+        answer = in.next();
     }
 
     public String[] getNames()
     {
         String[] names = new String[2];
         names[0] = names[1] = "";
-        System.out.println("Set name of the first player");
-        in.next(names[0]);
+        System.out.print("Set name of the first player: ");
+        names[0] = in.next();
+     //   System.out.println();
 
-        System.out.println("Set name of the second player");
-        in.next(names[1]);
-
-        //Game.getGame().getPlayers()[0].getMove().setAttack(new Attack(Target.Head, AttackType.Berserk));
+        System.out.print("Set name of the second player: ");
+        names[1] = in.next();
+    //    System.out.println();
 
         return names;
     }
@@ -66,10 +67,10 @@ public class Visualiser {
             Target defenseTarget = Target.Body;
             AttackType attackType = AttackType.Normal;
 
-            System.out.println("Set an attack target");
+            System.out.print("Set an attack target: ");
             while (!temp.matches("Head|HEAD|head|body|BODY|Body|Legs|LEGS|legs"))
-                in.next(temp);
-            switch (temp.toLowerCase().charAt(0)) {
+                temp = in.next();
+                switch (temp.toLowerCase().charAt(0)) {
                 case 'h':
                     attackTarget = Target.Head;
                     break;
@@ -81,9 +82,9 @@ public class Visualiser {
                     break;
             }
 
-            System.out.println("Set an attack type");
+            System.out.print("Set an attack type: ");
             while (!temp.matches("Berserk|BERSERK|berserk|Normal|NORMAL|normal|Concentrated|CONCENTRATED|concentrated"))
-                in.next(temp);
+                temp = in.next();
             switch (temp.toLowerCase().charAt(0)) {
                 case 'b':
                     attackType = AttackType.Berserk;
@@ -96,9 +97,9 @@ public class Visualiser {
                     break;
             }
 
-            System.out.println("Set a defense target");
+            System.out.print("Set a defense target: ");
             while (!temp.matches("Head|HEAD|head|body|BODY|Body|Legs|LEGS|legs"))
-                in.next(temp);
+                temp = in.next();
             switch (temp.toLowerCase().charAt(0)) {
                 case 'h':
                     defenseTarget = Target.Head;
@@ -116,15 +117,65 @@ public class Visualiser {
         return null;
     }
 
-    public void outStatus(Player player)
+    public void outStatus(Player player, Player player1)
     {
         PlayerCondition pc = new PlayerCondition(player);
-        System.out.println("Player name: " + pc.getName().toUpperCase());
+        PlayerCondition enemyPc = new PlayerCondition(player1);
+        System.out.println("Current player name: " + pc.getName().toUpperCase());
         System.out.println("Hit points: " + pc.getHp());
         System.out.print("Status: ");
         if (pc.getStatus() == Status.Active)
-            System.out.println("ACTIVE");
+            System.out.println("ACTIVE\n");
         else
-            System.out.println("STUNNED");
+            System.out.println("STUNNED\n");
+        System.out.println("Enemy hit points: " + enemyPc.getHp());
+
+        System.out.print("Enemy status: ");
+        if (enemyPc.getStatus() == Status.Active)
+            System.out.println("ACTIVE\n");
+        else
+            System.out.println("STUNNED\n");
+    }
+
+    public void outMoveResult(MoveResult[] moveResults)
+    {
+         for(MoveResult mr : moveResults)
+         {
+             System.out.print("Player " + mr.getName().toUpperCase());
+             switch (mr.getAttackResult())
+             {
+                 case Not_realised:
+                     System.out.print(" is still stunned");
+                     break;
+                 case Missed:
+                     System.out.print(" missed");
+                     break;
+                 case Blocked:
+                     System.out.print(" hit block");
+                     break;
+                 case Succeeded:
+                     System.out.print(" intflicted " + mr.getDamage() + " damage");
+                     if (mr.getStunned())
+                         System.out.print(" and stunned his enemy");
+                     break;
+             }
+             System.out.println();
+         }
+
+        printWhiteSpaces(2);
+    }
+
+    public int anotherPlayer(int currentPlayer)
+    {
+        if (currentPlayer == 0)
+            return 1;
+        else
+            return 0;
+    }
+
+    public void printWhiteSpaces(int number)
+    {
+        for(int i = 0; i < number; i++)
+            System.out.println('*');
     }
 }

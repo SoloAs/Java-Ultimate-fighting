@@ -54,7 +54,7 @@ public class Attack {
                 break;
             case Concentrated:
                 approximateDamage *= 0.6;
-                stunChance += 20;
+                stunChance += 30;
                 break;
         }
 

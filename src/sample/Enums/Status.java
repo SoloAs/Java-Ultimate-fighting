@@ -5,6 +5,6 @@ package sample.enums;
  */
 public enum Status {
     Active,
-    Stunned;
+    Stunned
 }
 
